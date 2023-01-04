@@ -4,12 +4,30 @@ import Header from "./Components/Header/Header";
 import Homepage from "./pages/Homepage";
 import Movielist from "./Components/MovieList/Movielist";
 import MovieDet from "./pages/MovieDet/MovieDet";
+import { useState, useEffect } from "react";
 
 function App() {
+  const [width, setWidth] = useState(0);
+  useEffect(() => {
+    updateDimensions();
+
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, []);
+
+  const updateDimensions = () => {
+    const width = window.innerWidth;
+    setWidth(width);
+  };
+
+  const responsive = {
+    showTopNavMenu: width > 1023,
+  };
+
   return (
     <div className="App">
       <Router>
-        <Header />
+        <Header showTopNavMenu={responsive.showTopNavMenu} />
         <Routes>
           <Route index element={<Homepage />}></Route>
           <Route path="movie/:id" element={<MovieDet />}></Route>
