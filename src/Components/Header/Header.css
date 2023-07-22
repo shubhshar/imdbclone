@@ -6,7 +6,8 @@
   padding: 0.5rem 0;
 }
 .img_header_icon {
-  width: 80px;
+  width: 65px;
+  height:32px
   cursor: pointer;
 }
 
